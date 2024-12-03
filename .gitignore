@@ -1,0 +1,50 @@
+# Compiled Python files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+env/
+*.venv/
+*.virtualenv/
+cc-points-analyzer-venv/
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+*.db
+
+# Celery
+celerybeat-schedule*
+
+# Static and media files
+staticfiles/
+media/
+
+# VSCode
+.vscode/
+
+# IDE
+.idea/
+
+# Node modules
+node_modules/
+
+# Byte-compiled/generated code
+*.py[cod]
+*.so
+*.pyd
+
+# Logs
+*.log
+*.out
+*.err
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
