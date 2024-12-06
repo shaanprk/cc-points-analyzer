@@ -37,11 +37,11 @@
    </h4>
 
    <ul>
-      <li>**React**: Used to handle frontend. [React Docs](https://react.dev/)</li>
-      <li>**Django**: Used to handle backend. [Django Docs](https://www.djangoproject.com/)</li>
-      <li>**PostgreSQL**: Used as database. [PostgreSQL Docs](https://www.postgresql.org/)</li>
-      <li>**Selenium**: Used to scrape information. [Selenium Docs](https://www.selenium.dev/)</li>
-      <li>**Celery**: Used to automate tasks. [Celery Docs](https://docs.celeryproject.org/)</li>
+      <li><b>React</b>: Used to handle frontend. [React Docs](https://react.dev/)</li>
+      <li><b>Django</b>: Used to handle backend. [Django Docs](https://www.djangoproject.com/)</li>
+      <li><b>PostgreSQL</b>: Used as database. [PostgreSQL Docs](https://www.postgresql.org/)</li>
+      <li><b>Selenium</b>: Used to scrape information. [Selenium Docs](https://www.selenium.dev/)</li>
+      <li><b>Celery</b>: Used to automate tasks. [Celery Docs](https://docs.celeryproject.org/)</li>
    </ul>
 </div>
 
