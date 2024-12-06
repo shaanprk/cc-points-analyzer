@@ -1,6 +1,8 @@
 # Compiled Python files
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
 
 # Virtual environment
 env/
@@ -31,6 +33,8 @@ media/
 
 # Node modules
 node_modules/
+backend/node_modules/
+frontend/node_modules/
 
 # Byte-compiled/generated code
 *.py[cod]
@@ -39,6 +43,7 @@ node_modules/
 
 # Logs
 *.log
+*.log.*
 *.out
 *.err
 
@@ -48,3 +53,7 @@ Thumbs.db
 
 # Environment variables
 .env
+
+# React
+frontend/build/
+frontend/.env

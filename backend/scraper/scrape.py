@@ -6,7 +6,7 @@ Central Scrape Orchestrator
 from celery import shared_task
 
 # Task to be run daily by Celery
-@shared_task
+@shared_task 
 def run_scrapers():
     from scrapers.amex_gold import AmexGoldScraper
     from scrapers.amex_plat import AmexPlatScraper
@@ -23,6 +23,6 @@ def run_scrapers():
         scraper = scraper_class()
         scraper.scrape()
 
-# Manual command to run script
+# Manual command to run script for testing
 # if __name__ == "__main__":
 #     run_scrapers()
