@@ -20,3 +20,54 @@
            alt="PostgreSQL Badge">
    </a>
 </p>
+
+<div id="project-overview">
+   <h4 align="center">
+      Project Overview
+   </h4>
+
+   <p>
+      The **Credit Card Points Analyzer** is an app designed to help users make smarter financial decisions by analyzing credit card point multipliers along with spending habits and recommending the best card for each purchase.
+   </p>
+</div>
+
+<div id="tech-stack">
+   <h4 align="center">
+      Tech Stack
+   </h4>
+
+   <ul>
+      <li>**React**: Used to handle frontend. [React Docs](https://react.dev/)</li>
+      <li>**Django**: Used to handle backend. [Django Docs](https://www.djangoproject.com/)</li>
+      <li>**PostgreSQL**: Used as database. [PostgreSQL Docs](https://www.postgresql.org/)</li>
+      <li>**Selenium**: Used to scrape information. [Selenium Docs](https://www.selenium.dev/)</li>
+      <li>**Celery**: Used to automate tasks. [Celery Docs](https://docs.celeryproject.org/)</li>
+   </ul>
+</div>
+
+<div id="folder-structure">
+   <h4 align="center">
+      Folder Structure
+   </h4>
+
+   <ul>
+      <li>cc-points-analyzer
+         <ul>
+            <li>
+               /backend
+               <ul>
+                  <li>/api</li>
+                  <li>/backend</li>
+                  <li>/scraper</li>
+               </ul>
+            </li>
+            <li>
+               /frontend
+               <ul>
+                  <li>d</li>
+               </ul>
+            </li>
+         </ul>
+      </li>
+   </ul>
+</div>
