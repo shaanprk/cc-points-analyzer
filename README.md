@@ -27,7 +27,7 @@
    </h4>
 
    <p>
-      The **Credit Card Points Analyzer** is an app designed to help users make smarter financial decisions by analyzing credit card point multipliers along with spending habits and recommending the best card for each purchase.
+      The <b>Credit Card Points Analyzer</b> is an app designed to help users make smarter financial decisions by analyzing credit card point multipliers along with spending habits and recommending the best card for each purchase.
    </p>
 </div>
 
