@@ -38,10 +38,10 @@
 
    <ul>
       <li><b>React</b>: Used to handle frontend. <a href="https://react.dev/">React Docs</a></li>
-      <li><b>Django</b>: Used to handle backend. [Django Docs](https://www.djangoproject.com/)</li>
-      <li><b>PostgreSQL</b>: Used as database. [PostgreSQL Docs](https://www.postgresql.org/)</li>
-      <li><b>Selenium</b>: Used to scrape information. [Selenium Docs](https://www.selenium.dev/)</li>
-      <li><b>Celery</b>: Used to automate tasks. [Celery Docs](https://docs.celeryproject.org/)</li>
+      <li><b>Django</b>: Used to handle backend. <a href="https://www.djangoproject.com/">Django Docs</a></li>
+      <li><b>PostgreSQL</b>: Used as database. <a href="https://www.postgresql.org/">PostgreSQL Docs</a></li>
+      <li><b>Selenium</b>: Used to scrape information. <a href="https://www.selenium.dev/">Selenium Docs</a></li>
+      <li><b>Celery</b>: Used to automate tasks. <a href="https://docs.celeryproject.org/">Celery Docs</a></li>
    </ul>
 </div>
 
