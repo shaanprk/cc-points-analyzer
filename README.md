@@ -21,6 +21,21 @@
    </a>
 </p>
 
+<p align="center">
+   <a href="https://www.selenium.dev/">
+      <img src="https://img.shields.io/badge/v4.27-_?logo=selenium&logoColor=%2343B02A&label=Selenium&color=%2343B02A"
+           alt="Selenium Badge">
+   </a>
+   <a href="https://docs.celeryq.dev/en/stable/index.html">
+      <img src="https://img.shields.io/badge/v5.4-_?logo=celery&logoColor=%2337814A&label=Celery&color=%2337814A"
+           alt="Celery Badge">
+   </a>
+   <a href="https://pytorch.org/">
+      <img src="https://img.shields.io/badge/v2.5.1-_?logo=pytorch&logoColor=%23EE4C2C&label=PyTorch&color=%23EE4C2C"
+           alt="PyTorchL Badge">
+   </a>
+</p>
+
 <div id="project-overview">
    <h4 align="center">
       Project Overview
