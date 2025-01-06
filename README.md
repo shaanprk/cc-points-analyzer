@@ -20,3 +20,69 @@
            alt="PostgreSQL Badge">
    </a>
 </p>
+
+<p align="center">
+   <a href="https://www.selenium.dev/">
+      <img src="https://img.shields.io/badge/v4.27-_?logo=selenium&logoColor=%2343B02A&label=Selenium&color=%2343B02A"
+           alt="Selenium Badge">
+   </a>
+   <a href="https://docs.celeryq.dev/en/stable/index.html">
+      <img src="https://img.shields.io/badge/v5.4-_?logo=celery&logoColor=%2337814A&label=Celery&color=%2337814A"
+           alt="Celery Badge">
+   </a>
+   <a href="https://pytorch.org/">
+      <img src="https://img.shields.io/badge/v2.5.1-_?logo=pytorch&logoColor=%23EE4C2C&label=PyTorch&color=%23EE4C2C"
+           alt="PyTorchL Badge">
+   </a>
+</p>
+
+<div id="project-overview">
+   <h4 align="center">
+      Project Overview
+   </h4>
+
+   <p>
+      The <b>Credit Card Points Analyzer</b> is an app designed to help users make smarter financial decisions by analyzing credit card point multipliers along with spending habits and recommending the best card for each purchase.
+   </p>
+</div>
+
+<div id="tech-stack">
+   <h4 align="center">
+      Tech Stack
+   </h4>
+
+   <ul>
+      <li><b>React</b>: Used to handle frontend. <a href="https://react.dev/">React Docs</a></li>
+      <li><b>Django</b>: Used to handle backend. <a href="https://www.djangoproject.com/">Django Docs</a></li>
+      <li><b>PostgreSQL</b>: Used as database. <a href="https://www.postgresql.org/">PostgreSQL Docs</a></li>
+      <li><b>Selenium</b>: Used to scrape information. <a href="https://www.selenium.dev/">Selenium Docs</a></li>
+      <li><b>Celery</b>: Used to automate tasks. <a href="https://docs.celeryproject.org/">Celery Docs</a></li>
+   </ul>
+</div>
+
+<div id="folder-structure">
+   <h4 align="center">
+      Folder Structure
+   </h4>
+
+   <ul>
+      <li>cc-points-analyzer
+         <ul>
+            <li>
+               /backend
+               <ul>
+                  <li>/api</li>
+                  <li>/backend</li>
+                  <li>/scraper</li>
+               </ul>
+            </li>
+            <li>
+               /frontend
+               <ul>
+                  <li>d</li>
+               </ul>
+            </li>
+         </ul>
+      </li>
+   </ul>
+</div>
