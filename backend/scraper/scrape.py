@@ -5,20 +5,22 @@ Central Scrape Orchestrator
 
 from celery import shared_task
 
+from scrapers.amex_gold import AmexGoldScraper
+from scrapers.amex_plat import AmexPlatScraper
+from scrapers.chase_saph_pref import ChaseSapphirePreferredScraper
+
+SCRAPERS = {
+    "amex_gold": AmexGoldScraper,
+    # "amex_plat": AmexPlatScraper,
+    # "chase_saph_pref": ChaseSapphirePreferredScraper,
+}
+
 # Task to be run daily by Celery
 @shared_task 
 def run_scrapers():
-    from scrapers.amex_gold import AmexGoldScraper
-    from scrapers.amex_plat import AmexPlatScraper
-    from scrapers.chase_saph_pref import ChaseSapphirePreferredScraper
 
-    scrapers = {
-        "amex_gold": AmexGoldScraper(),
-        "amex_plat": AmexPlatScraper(),
-        "chase_sapphire_preferred": ChaseSapphirePreferredScraper(),
-    }
 
-    for name, scraper_class in scrapers.items():
+    for name, scraper_class in SCRAPERS.items():
         print(f"Running scraper: {name}")
         scraper = scraper_class()
         scraper.scrape()

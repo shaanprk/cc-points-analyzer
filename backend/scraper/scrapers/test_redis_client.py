@@ -1,14 +1,14 @@
 """
-Redis Client Setup
+Redis Client Test Setup Test
 - Initializes a Redis client to store scraping results
 """
 import redis
 from django.conf import settings
 
 redis_client = redis.StrictRedis(
-    host = settings.REDIS_HOST,
-    port=settings.REDIS_PORT,
-    db=settings.REDIS_DB,
+    host = 'localhost',
+    port= 6380,
+    db= 0,
     # decode_responses=True
 )
 
