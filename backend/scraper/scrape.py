@@ -23,6 +23,8 @@ def run_scrapers():
         scraper = scraper_class()
         scraper.scrape()
 
+    print("hi")
+
 # Manual command to run script for testing
-# if __name__ == "__main__":
-#     run_scrapers()
+if __name__ == "__main__":
+    run_scrapers()

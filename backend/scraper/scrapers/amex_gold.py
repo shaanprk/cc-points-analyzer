@@ -7,6 +7,7 @@ from base_scraper import BaseScraper
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from contextlib import suppress
+from backend.redis_client import redis_client
 import json
 
 class AmexGoldScraper(BaseScraper):
@@ -44,9 +45,16 @@ class AmexGoldScraper(BaseScraper):
                 benefit_info = process_raw_text(raw_text)
                 if benefit_info:
                     benefits_data.append(benefit_info)
-                
-            with open("amex_gold_benefits.json", "w", encoding="utf-8") as f:
-                json.dump(benefits_data, f, indent=4, ensure_ascii=False)
+            
+            # Save as JSON file
+            # with open("amex_gold_benefits.json", "w", encoding="utf-8") as f:
+            #     json.dump(benefits_data, f, indent=4, ensure_ascii=False)
+
+            # Save to Redis
+            key = "amex_gold_benefits"
+            redis_client.set(key, json.dumps(benefits_data))
+
+            print(f"Data stored in Redis under key: {key}")
 
         finally:
             with suppress(Exception):
