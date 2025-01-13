@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api',
-    'scraper'
+    'scraper',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -157,15 +157,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL for Redis broker
+CELERY_BROKER_URL = 'redis://localhost:6380/0'  # URL for Redis broker
+CELERY_RESULT_BACKEND = 'redis://localhost:6380/0'  # URL for Redis backend (optional)
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Use Django database for scheduler
 CELERY_ACCEPT_CONTENT = ['json']  # Accepted content types
 CELERY_TASK_SERIALIZER = 'json'  # Serialization format for tasks
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL for Redis backend (optional)
 CELERY_RESULT_SERIALIZER = 'json'  # Serialization format for results
-
-CELERY_BEAT_SCHEDULE = {
-    'debug-task': {
-        'task': 'backend.celery.debug_task',  # Adjust path as necessary
-        'schedule': 10.0,  # Every 10 seconds
-    },
-}
+CELERY_ENABLE_UTC = False  # Use local timezone
+CELERY_TIMEZONE = 'America/Los_Angeles'  # Timezone for tasks

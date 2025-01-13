@@ -1,4 +1,3 @@
-from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
 from celery.schedules import crontab # Import crontab for scheduling
@@ -19,13 +18,10 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'run-scrapers-daily': {
-        'task': 'scraper.tasks.run_scrapers', # Task to run daily
+        'task': 'scraper.scrape.run_scrapers', # Task to run daily
         'schedule': crontab(hour=0, minute=0),  # Run once a day at midnight
     },
 }
-
-# Optiona timezone setting
-app.conf.timezone = 'PST'
 
 @app.task(bind=True)
 def debug_task(self):

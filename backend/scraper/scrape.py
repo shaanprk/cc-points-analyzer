@@ -5,10 +5,16 @@ Central Scrape Orchestrator
 
 from celery import shared_task
 
-from scrapers.amex_gold import AmexGoldScraper
-from scrapers.amex_plat import AmexPlatScraper
-from scrapers.chase_saph_pref import ChaseSaphPrefScraper
-from scrapers.chase_saph_res import ChaseSaphResScraper
+# from scrapers.amex_gold import AmexGoldScraper
+# from scrapers.amex_plat import AmexPlatScraper
+# from scrapers.chase_saph_pref import ChaseSaphPrefScraper
+# from scrapers.chase_saph_res import ChaseSaphResScraper
+
+from scraper.scrapers.amex_gold import AmexGoldScraper
+from scraper.scrapers.amex_plat import AmexPlatScraper
+from scraper.scrapers.chase_saph_pref import ChaseSaphPrefScraper
+from scraper.scrapers.chase_saph_res import ChaseSaphResScraper
+
 
 SCRAPERS = {
     "amex_gold": AmexGoldScraper,
