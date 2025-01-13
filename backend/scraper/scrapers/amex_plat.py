@@ -1,53 +1,49 @@
 """
-Amex Plat Scraper
-- Scrapes the benefits of the Amex Plat Card
+American Express Platinum Card Scraper
+- Scrapes the benefits of the Amex Plat Card from https://www.americanexpress.com/us/credit-cards/card/platinum/
+- Processes the raw text of each benefit entry into structured data
+- Stores the structured data in Redis
 """
 
-from base_scraper import BaseScraper
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from contextlib import suppress
-import json
+from playwright.sync_api import sync_playwright
 
-class AmexPlatScraper(BaseScraper):
+class AmexPlatScraper():
     def __init__(self):
         super().__init__()
         self.url = 'https://www.americanexpress.com/us/credit-cards/card/platinum/'
-        self.xpath_exp = '//*[@id="root"]/div[7]/div/div[2]/div/div/div/div/div[2]/div[6]/div/div/div/section/ul/li/div'
 
     def scrape(self):
-        try:
-            self.load_page(self.url)
-            benefits = self.wait.until(
-                EC.presence_of_all_elements_located((By.XPATH, self.xpath_expr))
-            )
+        """
+        Scrapes the Amex Plat card benefits and stores them in Redis
+        """
+        # Launch browser
+        with sync_playwright() as p:
+            # Launch the browser
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
 
-            def process_raw_text(raw_text):
-                lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
-                if len(lines) < 3:
-                    return None
+            # Navigate to the page
+            page.goto(self.url)
 
-                title = lines[0]
-                multiplier = lines[1]
-                conditions = " ".join(lines[3:]) if len(lines) > 3 else ""
+            # Wait for benefits section to load
+            page.wait_for_selector("div.axp-shop-us-consumer__index__howYouEarn___3Y3ia", state='attached')
 
-                return {
-                    "Title:": title,
-                    "Multiplier": multiplier,
-                    "Conditions": conditions
-                }
+            # Extract the benefits section
+            first_div = page.query_selector('div.axp-shop-us-consumer__index__howYouEarn___3Y3ia')
+            li_elements = first_div.query_selector_all('li') if first_div else []
 
-            benefits_data = []
+            # Parse benefits section
+            rewards = []
+            for li in li_elements:
+                text = li.text_content()
+                if text:
+                    rewards.append(text.strip())
 
-            for benefit in benefits:
-                raw_text = benefit.get_atrribute("innertext")
-                benefit_info = process_raw_text(raw_text)
-                if benefit_info:
-                    benefits_data.append(benefit_info)
-                
-            with open("amex_plat_benefits.json", "w", encoding="utf-8") as f:
-                json.dump(benefits_data, f, indent=4, ensure_ascii=False)
-            
-        finally:
-            with suppress(Exception):
-                self.quit_driver()
+            print("Extracted items:")
+            for item in rewards:
+                print("-", item)
+
+            browser.close()
+
+if __name__ == "__main__":
+    AmexPlatScraper().scrape()

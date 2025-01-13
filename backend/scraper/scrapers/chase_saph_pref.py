@@ -1,75 +1,48 @@
 """
-Chase Sapphire Preferred
-- Scrapes the benefits of the Chase Sapphire Preferred Card
+Chase Sapphire Preferred Scraper
+- Scrapes the benefits of the Chase Sapphire Preferred Card from https://creditcards.chase.com/a1/24Q4/sapphirepreferred?CELL=6H8X
+- Processes the raw text of each benefit entry into structured data
+- Stores the structured data in Redis
 """
 
-from base_scraper import BaseScraper
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from contextlib import suppress
-import json
-import re
+from playwright.sync_api import sync_playwright
 
-class ChaseSapphirePreferredScraper(BaseScraper):
+class ChaseSaphPrefScraper():
     def __init__(self):
         super().__init__()
         self.url = 'https://creditcards.chase.com/a1/24Q4/sapphirepreferred?CELL=6H8X'
-        self.xpath_expr = "//section[contains(@class, 'section-earn')]//div[contains(@class, 'slick-track')]//div[contains(@class, 'slick-slide') and not(contains(@class, 'slick-cloned'))]"
-    
+
     def scrape(self):
-        try:
-            self.load_page(self.url)
-            benefits = self.wait.until(
-                EC.presence_of_all_elements_located((By.XPATH, self.xpath_expr))
-            )
+        """
+        Scrapes the Chase Sapphire Preferred card benefits and stores them in Redis
+        """
+        # Launch browser
+        with sync_playwright() as p:
+            # Launch the browser
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
 
-            def process_raw_text(raw_text):
-                lines = [line.strip() for line in raw_text.splitlines() if line.strip()]
+            # Navigate to the page
+            page.goto(self.url, wait_until="domcontentloaded")
 
-                multiplier_match = re.search(r'(\d+x)', raw_text)
-                if not multiplier_match:
-                    return None
+            # Wait for benefits section to load
+            page.wait_for_selector("section.section-earn", state='attached')
 
-                multiplier = multiplier_match.group(1)
+            # Extract the benefits section
+            benefits = page.query_selector_all('section.section-earn div.slick-slide:not(.slick-cloned) h4')
 
-                try:
-                    title_index = lines.index(multiplier)
-                    title = lines[title_index]
-
-                    conditions_arr = []
-                    title_finished = False
-                    for line in lines[title_index + 1:]:
-                        if "offer details Opens overlay" in line or "Offer details Opens overlay" in line:
-                            pass
-                        elif not line.startswith('Earn') and not title_finished:
-                            title = title + " " + line
-                        else:
-                            title_finished = True
-                            conditions_arr.append(line)
-                    conditions = ' '.join(conditions_arr)
-                except (ValueError, IndexError):
-                    return None
-
-
-                return {
-                    "Title": title,
-                    "Multiplier": multiplier,
-                    "Conditions": conditions,
-                }
-            
-            benefits_data = []
-
-            # Extract and process each benefit
+            # Parse benefits section
+            rewards = []
             for benefit in benefits:
-                raw_text = benefit.get_attribute("innerText")
-                benefit_info = process_raw_text(raw_text)
-                if benefit_info:
-                    benefits_data.append(benefit_info)
+                text = benefit.text_content()
+                if text:
+                    rewards.append(text.strip())
 
-            # Write to external file
-            with open("chase_sapphire_preferred_benefits.json", "w", encoding="utf-8") as f:
-                json.dump(benefits_data, f, indent=4, ensure_ascii=False)
-        
-        finally:
-            with suppress(Exception):
-                self.quit_driver()
+            print("Extracted items:")
+            for item in rewards:
+                print("-", item)
+
+            browser.close()
+
+if __name__ == "__main__":
+    ChaseSaphPrefScraper().scrape()
