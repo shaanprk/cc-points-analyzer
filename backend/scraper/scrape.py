@@ -18,8 +18,6 @@ SCRAPERS = {
 # Task to be run daily by Celery
 @shared_task 
 def run_scrapers():
-
-
     for name, scraper_class in SCRAPERS.items():
         print(f"Running scraper: {name}")
         scraper = scraper_class()
