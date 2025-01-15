@@ -46,7 +46,7 @@ const Footer = () => {
           <p>© 2025 YourAppName LLC.</p>
           <div className="social-icons">
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <i className="fab fa-twitter"></i>
+              <i className="fab fa-twitter">adf</i>
             </a>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-facebook-f"></i>
