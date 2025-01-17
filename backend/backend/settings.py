@@ -14,32 +14,31 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='../../.env')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q6kx7egkf7i3hrd9inr%y)9dpre6vs$6#t_un%g*bfkpy_@s)2'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallbackkey')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # For development; restrict origins in production
 # CORS_ALLOW_ALL_ORIGINS = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'corsheaders',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -104,16 +103,19 @@ DATABASES = {
     }
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": ""
-#     }
-# }
-
 REDIS_HOST = os.environ.get('REDISHOST', 'localhost')
 REDIS_PORT = os.environ.get('REDISPORT', 6379)
 REDIS_DB = os.environ.get('REDISDB', 0)
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}", # Use DB 0 for caching
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -157,8 +159,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6380/0'  # URL for Redis broker
-CELERY_RESULT_BACKEND = 'redis://localhost:6380/0'  # URL for Redis backend (optional)
+CELERY_DB = os.environ.get('CELERYDB', 1)
+
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_DB}'  # URL for Redis broker
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_DB}'  # URL for Redis backend (optional)
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Use Django database for scheduler
 CELERY_ACCEPT_CONTENT = ['json']  # Accepted content types
 CELERY_TASK_SERIALIZER = 'json'  # Serialization format for tasks
