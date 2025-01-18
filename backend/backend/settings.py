@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallbackkey')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # For development; restrict origins in production
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'scraper',
     'django_celery_beat',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:5173', # React development server
+#     'http://127.0.0.1:5173'
+# ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
